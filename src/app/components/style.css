@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Product Sans';
+  src: url('/font/Product Sans Regular.ttf') format('woff2');
+
+
+}
+.roboto {
+    font-family: 'Product Sans', sans-serif;
+    /* font-weight: bolder; */
+    font-style: normal;
+  }
+
+
+
+
