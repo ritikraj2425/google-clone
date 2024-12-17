@@ -11,10 +11,9 @@ import {
 import { DataContext } from "../context/context";
 
 const GoogleSearchPage = () => {
-    // const [searchQuery, setSearchQuery] = useState("next js");
 
     const {mockSearchResults,searchQuery} = useContext(DataContext);
-    console.log(searchQuery,"dfsdfs")
+    console.log(mockSearchResults,"dfsdfs")
 
 
     return (
@@ -75,21 +74,23 @@ const GoogleSearchPage = () => {
 
                 {mockSearchResults?.map((result, index) => (
                     <div key={index} className="mb-10">
-                        <div className="text-sm text-gray-400 mb-1">
+                        <div className="text-sm flex text-gray-400 mb-1 gap-2">
+                            <img src={result.favicon} className="h-6 w-6"></img>
                             <a
                                 href={result.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="hover:underline"
+                                className="hover:underline mt-1"
                             >
                                 {result.link}
                             </a>
+
                         </div>
                         <a
                             href={result.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#99C3FF] hover:underline text-2xl font-medium"
+                            className="text-[#99C3FF]  hover:underline text-2xl font-medium"
                         >
                             {result.title}
                         </a>

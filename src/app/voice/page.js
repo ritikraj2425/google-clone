@@ -1,6 +1,7 @@
 'use client'
 import './voice.css'
 import { useRouter } from 'next/navigation'
+import { X } from 'lucide-react';
 
 export default function GoogleVoice() {
     const router = useRouter();
@@ -16,7 +17,7 @@ export default function GoogleVoice() {
                 onClick={handleCross}
                 className="absolute top-4 right-4 text-2xl md:text-3xl text-[#E8EAED] hover:text-white transition duration-200"
             >
-                &times;
+                <X/>
             </button>
 
             {/* Listening Text with Animation */}
