@@ -44,7 +44,7 @@ export default function Main() {
     useEffect(() => {
         const timer = setTimeout(() => {
             if (search !== "") {
-                fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
+                fetch(`https://api.tvmaze.com/search/shows?q=${search}`)
                     .then((res) => {
                         return res.json();
                     })
