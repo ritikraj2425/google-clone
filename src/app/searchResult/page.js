@@ -12,43 +12,61 @@ import { DataContext } from "../context/context";
 
 const GoogleSearchPage = () => {
 
-    const {mockSearchResults,searchQuery} = useContext(DataContext);
-    console.log(mockSearchResults,"dfsdfs")
+    const { mockSearchResults, searchQuery } = useContext(DataContext);
+    console.log(mockSearchResults, "dfsdfs")
 
 
     return (
         <div className="bg-[#202124] min-h-screen text-white">
-            <header className="flex flex-wrap justify-between items-center p-4  border-gray-700">
-                <div className="flex items-center space-x-4 w-full md:w-auto">
+            <header className="flex flex-col md:flex-row justify-between items-center p-4 border-gray-700">
+
+                <div className="flex justify-between items-center w-full md:w-auto mb-4 md:mb-0">
                     <img
                         src="https://white.logodownload.org/wp-content/uploads/2020/11/google-white-logo.png"
                         alt="Google Logo"
                         className="h-6 md:h-9"
                     />
-                    <div className="relative w-full md:w-[700px] lg:w-[800px]">
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-[#494c4b] border border-gray-700 rounded-full px-4 py-2 pl-10 w-full focus:outline-none "
+
+                    <div className="flex items-center space-x-6 md:hidden">
+                        <img
+                            className="h-6 w-6 cursor-pointer"
+                            src="/menu.png"
+                            alt="Menu Icon"
                         />
-                        <Search className="absolute left-3 top-3 text-gray-400" size={20} />
-                        <div className="absolute right-3 top-3 flex space-x-2">
-                            <Mic className="text-gray-400 cursor-pointer" size={20} />
-                            <Image className="text-gray-400 cursor-pointer" size={20} />
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-md">
+                            A
                         </div>
                     </div>
                 </div>
 
-                <div className="flex items-center space-x-6 w-full md:w-auto mt-4 md:mt-0">
+                <div className="relative md:mr-40 w-full md:w-[900px] lg:w-[1000px]">
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="bg-[#494c4b] border border-gray-700 rounded-full px-4 py-2 pl-10 w-full focus:outline-none"
+                    />
+                    <Search className="absolute left-3 top-3 text-gray-400" size={20} />
+                    <div className="absolute right-3 top-3 flex space-x-2">
+                        <Mic className="text-gray-400 cursor-pointer" size={20} />
+                        <Image className="text-gray-400 cursor-pointer" size={20} />
+                    </div>
+                </div>
 
-
-                <img className="h-6 w-6  cursor-pointer" src="/menu.png"></img>
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-md">
+                <div className="hidden md:flex items-center space-x-6">
+                    <img
+                        className="h-6 w-6 cursor-pointer"
+                        src="/menu.png"
+                        alt="Menu Icon"
+                    />
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-md">
                         A
                     </div>
                 </div>
             </header>
+
+
+
 
             <nav className="flex text-md md:ml-32 ml-2 text-gray-400 mt-2 px-4 py-2 border-b border-gray-700 space-x-4 md:space-x-6 flex-wrap">
                 <button className="flex items-center space-x-3 border-b-2 border-white text-white pb-2">

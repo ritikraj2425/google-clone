@@ -1,6 +1,6 @@
 'use client'
 import './style.css'
-import { Search, TrendingUp ,X} from 'lucide-react'
+import { Search, TrendingUp, X } from 'lucide-react'
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DataContext } from '../context/context';
@@ -8,10 +8,6 @@ import { DataContext } from '../context/context';
 
 export default function Main() {
     const [isFocused, setIsFocused] = useState(false);
-    const router = useRouter();
-    const { setSearchQuery, setMockSearchResults, setGoogleLens } = useContext(DataContext);
-
-
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [lens, setLens] = useState(false);
@@ -19,6 +15,13 @@ export default function Main() {
         "gemini 2.0 ai model", "hanuman jayanti", "delhi pollution", "zero se restart movie release date", "movie trailers",
         "pi network mainnet launch"
     ];
+    const [imageLink, setImageLink] = useState("");
+    const [uploadedImage, setUploadedImage] = useState(null);
+    const [search, setSearch] = useState('');
+
+    const router = useRouter();
+    const { setSearchQuery, setMockSearchResults, setGoogleLens } = useContext(DataContext);
+
 
 
     const handleFocus = () => {
@@ -31,10 +34,6 @@ export default function Main() {
         }
     };
 
-
-    const [search, setSearch] = useState('');
-
-
     const handleMic = () => {
         router.push('/voice');
     }
@@ -43,8 +42,6 @@ export default function Main() {
 
 
     useEffect(() => {
-
-
         const timer = setTimeout(() => {
             if (search !== "") {
                 fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
@@ -60,7 +57,6 @@ export default function Main() {
             } else {
                 setData([]);
             }
-
         }, 300)
 
         return () => clearTimeout(timer);
@@ -77,21 +73,17 @@ export default function Main() {
         router.push('/searchResult');
     }
 
-    const [uploadedImage, setUploadedImage] = useState(null);
-    const [imageLink, setImageLink] = useState("");
 
 
     const handleFileUpload = (fileOrEvent) => {
         let file;
-    
+
         if (fileOrEvent instanceof File) {
-            // If a File object is passed (drag-and-drop)
             file = fileOrEvent;
         } else {
-            // If an event object is passed (file input)
             file = fileOrEvent?.target?.files?.[0];
         }
-    
+
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
@@ -105,7 +97,7 @@ export default function Main() {
             console.log("No file uploaded or invalid event.");
         }
     };
-    
+
 
     const handleFileChange = (e) => {
         handleFileUpload(e);
@@ -118,7 +110,7 @@ export default function Main() {
         const file = e.dataTransfer.files[0];
         handleFileUpload(file);
     };
-    
+
 
     const handleSearchClick = () => {
         if (imageLink) {
@@ -134,14 +126,24 @@ export default function Main() {
                 loading ?
                     <div className="min-h-screen flex justify-center items-center">
                         <div className="flex items-center mb-20 space-x-2 text-white text-3xl">
-                            <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                            <div className="relative w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mb-4"></div>
                             <span>Loading...</span>
                         </div>
                     </div>
                     :
-                    <div className="text-[#E8EAED] relative mt-6 z-50">
-                        <div className="min-h-[150px] h-[calc(100%-560px)] max-h-[290px] mt-3">
-                            <h1 className="text-center md:text-8xl text-7xl font-semibold  roboto ">Google</h1>
+                    <div className="text-[#E8EAED] relative mt-9 z-50">
+                        <div className="relative min-h-[150px] h-[calc(100%-560px)] max-h-[290px] mt-3 flex justify-center items-center">
+                            <img
+                                className="w-auto md:h-[102px] h-20"
+                                src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
+                                alt="Google Logo"
+                            />
+
+                            {/* <h1 className="text-center text-[#e8e8e8] md:text-8xl text-[14px] font-medium  roboto ">Googl
+                                <span>
+                                e
+                                </span>
+                                </h1> */}
                         </div>
                         {
                             lens ?
@@ -162,7 +164,7 @@ export default function Main() {
                                                 }}
                                                 className="font-thin text-2xl"
                                             >
-                                                <X/>
+                                                <X />
                                             </button>
                                         </div>
 
@@ -190,7 +192,7 @@ export default function Main() {
                                                         id="fileInput"
                                                         className="hidden"
                                                         accept="image/*"
-                                                        onChange={(e) => handleFileChange(e)} 
+                                                        onChange={(e) => handleFileChange(e)}
                                                     />
 
                                                 </p>
@@ -231,9 +233,9 @@ export default function Main() {
                                     onBlur={handleBlur}
                                     tabIndex={-1}
                                 >
-                                    <div className={`md:w-[40rem] flex-col ${isFocused ? 'rounded-3xl' : 'rounded-full'} ${isFocused ? 'bg-[#28292a]' : 'bg-[#444746] hover:bg-[#525353]'} `}>
-                                        <div className="flex h-12">
-                                            <Search className="ml-4 scale-105 mt-3 text-[#bfbfbf]" />
+                                    <div className={`md:w-[40rem] flex-col ${isFocused ? 'rounded-3xl' : 'rounded-full'} ${isFocused ? 'bg-[#303134]' : 'bg-[#4D5156] hover:bg-[#626467]'} `}>
+                                        <div className="flex h-[3rem] ">
+                                            <Search className="ml-4 scale-75 mt-3 text-[#9c9898]" />
                                             <input type="text"
                                                 onKeyDown={(e) => {
                                                     if (e.key === "Enter") {
@@ -251,7 +253,9 @@ export default function Main() {
                                                     <div className='flex gap-3'>
                                                         <button className='text-[#d2d4d6] font-medium text-xl'
                                                             onClick={() => setSearch('')}
-                                                        >X </button>
+                                                        >
+                                                            <X/>
+                                                        </button>
                                                         <p className='mt-3 scale-y-150 text-[#444746]'>|</p>
                                                     </div>
                                                     : <></>
@@ -264,33 +268,40 @@ export default function Main() {
                                         {isFocused && (
                                             <div className="relative">
                                                 <div className="flex justify-center">
-                                                    <hr className="w-[95%] border-t-1 border-[#444746] font-light" />
+                                                    <hr className="w-[95%] border-t-1 border-[#5f6368] font-light" />
                                                 </div>
                                                 <div className=''>
-                                                    <p className='text-[#9E9E9E] pt-4 pl-4'>Trending Searches</p>
                                                     {
                                                         data.length > 0 ?
                                                             data?.map((item, index) => {
                                                                 return (
-                                                                    <div onClick={() => { handleGoogleSearch(item.show.name), setSearchQuery(item.show.name) }} className='flex pl-4 pt-1 gap-2 mt-1 text-[19px] cursor-pointer roboto hover:bg-[#444746]' key={index}>
-                                                                        <Search className='text-[#9E9E9E] font-thin mt-1' /> {item.show.name}
+                                                                    <div onClick={() => { handleGoogleSearch(item.show.name), setSearchQuery(item.show.name) }} className='flex roboto pl-4 pt-1 gap-2 mt-1 text-[17px] font-semibold cursor-pointer  hover:bg-[#E8EAED]' key={index}>
+                                                                        <Search className='text-[#9E9E9E] scale-75 font-thin mt-1 ' /> {item.show.name}
                                                                     </div>
                                                                 )
                                                             })
                                                             :
-                                                            searchData?.map((item, index) => {
+                                                            <>
+                                                            <p className='text-[#9E9E9E] pt-4 pl-4'>Trending Searches</p>
+                                                            {searchData?.map((item, index) => {
                                                                 return (
-                                                                    <div onClick={() => { handleGoogleSearch(item), setSearchQuery(item) }} className='flex pl-4 pt-1 gap-2 mt-1 text-[19px] cursor-pointer roboto hover:bg-[#444746]' key={index}>
-                                                                        <TrendingUp className='text-[#9E9E9E] mt-1' /> {item}
+                                                                    <div onClick={() => { handleGoogleSearch(item), setSearchQuery(item) }} className='flex roboto pl-4 pt-1 gap-2 mt-1 text-[19px] cursor-pointer  hover:bg-[#444746]' key={index}>
+                                                                        <TrendingUp className='text-[#9E9E9E] mt-1 font-thin ' /> {item}
                                                                     </div>
                                                                 )
-                                                            })
+                                                            })}
+                                                            </>
                                                     }
                                                     <div className='relative'>
                                                         <div className='p-4 flex justify-center '>
-                                                            <button className='bg-[#444746] p-2'>Google Search</button>
-                                                            <button className='bg-[#444746] p-2 ml-2'>I'm Feeling Lucky</button>
+                                                            <button className='bg-[#303134] text-[#E8EAED] rounded-md p-2 ml-2 border border-transparent hover:border-[#5f5c5c]'>Google Search</button>
+                                                            <button className='bg-[#303134] text-[#E8EAED] rounded-md p-2 ml-2 border border-transparent hover:border-[#5f5c5c]'>I'm Feeling Lucky</button>
                                                         </div>
+                                                    </div>
+                                                    <div className="flex justify-end mr-5 mb-1">
+                                                        <p className="italic cursor-pointer text-[12px] text-[#9E9E9E]">
+                                                            Report inappropriate predictions
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -300,8 +311,8 @@ export default function Main() {
                                         !isFocused ?
                                             <div className="w-full">
                                                 <div className="p-4 flex justify-center flex-wrap space-x-2">
-                                                    <button className="bg-[#303134] p-2 rounded-md">Google Search</button>
-                                                    <button className="bg-[#303134] p-2 ml-2 rounded-md">I'm Feeling Lucky</button>
+                                                    <button className="bg-[#303134] text-[#E8EAED] p-2 rounded-md border border-transparent hover:border-[#5f5c5c]">Google Search</button>
+                                                    <button className="bg-[#303134] text-[#E8EAED] p-2 rounded-md border border-transparent hover:border-[#5f5c5c]">I'm Feeling Lucky</button>
                                                 </div>
                                                 <div className="flex flex-wrap justify-center mt-4 space-x-2 text-center">
                                                     <p>Google offered in:</p>

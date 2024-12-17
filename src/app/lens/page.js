@@ -5,9 +5,9 @@ import { Upload } from 'lucide-react';
 import { DataContext } from "../context/context";
 
 export default function ImageAnalyzerApp() {
-    const { googleLens } = useContext(DataContext);  // Get the image URL from context
+    const { googleLens } = useContext(DataContext);
 
-    const [uploadedImage, setUploadedImage] = useState(googleLens);  // Set the image URL directly from the context
+    const [uploadedImage, setUploadedImage] = useState(googleLens);
     const [cropPixels, setCropPixels] = useState(null);
     const [cropArea, setCropArea] = useState({ x: 0, y: 0 });
     const [zoomLevel, setZoomLevel] = useState(1);
@@ -29,9 +29,9 @@ export default function ImageAnalyzerApp() {
     useEffect(() => {
         const fetchProductData = async () => {
             try {
-                const response = await fetch("https://api.escuelajs.co/api/v1/products");
+                const response = await fetch("https://dummyjson.com/products");
                 const data = await response.json();
-                setProductList(data);
+                setProductList(data.products);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
             }
@@ -54,8 +54,11 @@ export default function ImageAnalyzerApp() {
                         <Upload className="mr-2 text-[#a09c9c]" />
                         <h2 className="text-sm text-[#a09c9c]">Upload</h2>
                     </button>
-                    <img src="https://cdn-icons-png.flaticon.com/256/17/17704.png" width={20} height={20} alt="Lens Icon" />
-                    <div className="w-8 h-8  bg-blue-500 rounded-full flex items-center justify-center text-sm text-white">
+                    <div className="flex items-center justify-center rounded-full h-8 w-8 relative hover:bg-[#b9c0bd]">
+                        <img className="h-4 w-4  cursor-pointer" src="https://cdn-icons-png.flaticon.com/256/17/17704.png"></img>
+                    </div>
+                    
+                    <div className="w-10 md:mt-0.5 h-10 cursor-pointer bg-blue-500 rounded-full flex items-center justify-center text-lg">
                         A
                     </div>
                 </div>
