@@ -275,7 +275,7 @@ export default function Main() {
                                                         data.length > 0 ?
                                                             data?.map((item, index) => {
                                                                 return (
-                                                                    <div onClick={() => { handleGoogleSearch(item.show.name), setSearchQuery(item.show.name) }} className='flex roboto pl-4 pt-1 gap-2 mt-1 text-[17px] font-semibold cursor-pointer  hover:bg-[#E8EAED]' key={index}>
+                                                                    <div onClick={() => { handleGoogleSearch(item.show.name), setSearchQuery(item.show.name) }} className='flex roboto pl-4 pt-1 gap-2 mt-1 text-[17px] font-semibold cursor-default  hover:bg-[#444746]' key={index}>
                                                                         <Search className='text-[#9E9E9E] scale-75 font-thin mt-1 ' /> {item.show.name}
                                                                     </div>
                                                                 )
@@ -285,7 +285,7 @@ export default function Main() {
                                                             <p className='text-[#9E9E9E] pt-4 pl-4'>Trending Searches</p>
                                                             {searchData?.map((item, index) => {
                                                                 return (
-                                                                    <div onClick={() => { handleGoogleSearch(item), setSearchQuery(item) }} className='flex roboto pl-4 pt-1 gap-2 mt-1 text-[19px] cursor-pointer  hover:bg-[#444746]' key={index}>
+                                                                    <div onClick={() => { handleGoogleSearch(item), setSearchQuery(item) }} className='flex roboto pl-4 pt-1 gap-2 mt-1 text-[19px] cursor-default   hover:bg-[#444746]' key={index}>
                                                                         <TrendingUp className='text-[#9E9E9E] mt-1 font-thin ' /> {item}
                                                                     </div>
                                                                 )
@@ -294,8 +294,8 @@ export default function Main() {
                                                     }
                                                     <div className='relative'>
                                                         <div className='p-4 flex justify-center '>
-                                                            <button className='bg-[#303134] text-[#E8EAED] rounded-md p-2 ml-2 border border-transparent hover:border-[#5f5c5c]'>Google Search</button>
-                                                            <button className='bg-[#303134] text-[#E8EAED] rounded-md p-2 ml-2 border border-transparent hover:border-[#5f5c5c]'>I'm Feeling Lucky</button>
+                                                            <button className='bg-[#3C4043] text-[#E8EAED] rounded-md p-2 ml-2 border border-transparent hover:border-[#5f5c5c]'>Google Search</button>
+                                                            <button className='bg-[#3C4043] text-[#E8EAED] rounded-md p-2 ml-2 border border-transparent hover:border-[#5f5c5c]'>I'm Feeling Lucky</button>
                                                         </div>
                                                     </div>
                                                     <div className="flex justify-end mr-5 mb-1">

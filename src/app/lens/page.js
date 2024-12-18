@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import Cropper from "react-easy-crop";
-import { Upload } from 'lucide-react';
+import { Upload, ZoomIn, ZoomOut } from 'lucide-react';
 import { DataContext } from "../context/context";
 
 export default function ImageAnalyzerApp() {
@@ -14,6 +14,14 @@ export default function ImageAnalyzerApp() {
     const [isProcessing, setIsProcessing] = useState(false);
     const [displayResults, setDisplayResults] = useState(false);
     const [productList, setProductList] = useState([]);
+
+    const handleZoomIn = () => {
+        setZoomLevel(prevZoom => Math.min(prevZoom + 0.1, 3));
+    };
+
+    const handleZoomOut = () => {
+        setZoomLevel(prevZoom => Math.max(prevZoom - 0.1, 1));
+    };
 
     const handleCropCompletion = useCallback((_, croppedPixels) => {
         setCropPixels(croppedPixels);
@@ -57,7 +65,7 @@ export default function ImageAnalyzerApp() {
                     <div className="flex items-center justify-center rounded-full h-8 w-8 relative hover:bg-[#b9c0bd]">
                         <img className="h-4 w-4  cursor-pointer" src="https://cdn-icons-png.flaticon.com/256/17/17704.png"></img>
                     </div>
-                    
+
                     <div className="w-10 md:mt-0.5 h-10 cursor-pointer bg-blue-500 rounded-full flex items-center justify-center text-lg">
                         A
                     </div>
@@ -65,19 +73,37 @@ export default function ImageAnalyzerApp() {
             </div>
 
             <div className="w-full mt-2  bg-white p-6 shadow-xl rounded-lg flex gap-4 h-[80vh]">
-                <div className="w-full sm:w-1/2 bg-[#242527] p-4 rounded-md relative overflow-hidden h-full">
+                <div className="w-full sm:w-1/2 bg-[#202124] p-4 rounded-md relative overflow-hidden h-full flex flex-col">
                     {uploadedImage ? (
-                        <div className="relative w-full h-[90%]">
-                            <Cropper
-                                image={uploadedImage}
-                                crop={cropArea}
-                                zoom={zoomLevel}
-                                aspect={7/5}
-                                onCropChange={setCropArea}
-                                onZoomChange={setZoomLevel}
-                                onCropComplete={handleCropCompletion}
-                            />
-                        </div>
+                        <>
+                            <div className="relative bg-[#ffffff] rounded-sm w-full flex-grow">
+                                <Cropper
+                                    image={uploadedImage}
+                                    crop={cropArea}
+                                    zoom={zoomLevel}
+                                    aspect={7 / 5}
+                                    onCropChange={setCropArea}
+                                    onZoomChange={setZoomLevel}
+                                    onCropComplete={handleCropCompletion}
+                                    className="rounded-lg"
+                                />
+                            </div>
+                            <div className="flex justify-center items-center space-x-4 mt-4">
+                                <button
+                                    onClick={handleZoomOut}
+                                    className="bg-gray-200 p-2 rounded-full hover:bg-gray-300"
+                                >
+                                    <ZoomOut size={20} />
+                                </button>
+                                <span className="text-white">{Math.round(zoomLevel * 100)}%</span>
+                                <button
+                                    onClick={handleZoomIn}
+                                    className="bg-gray-200 p-2 rounded-full hover:bg-gray-300"
+                                >
+                                    <ZoomIn size={20} />
+                                </button>
+                            </div>
+                        </>
                     ) : (
                         <div className="flex items-center justify-center h-full text-gray-400">
                             No image available.
@@ -109,7 +135,7 @@ export default function ImageAnalyzerApp() {
                                     className="flex flex-col items-center bg-white p-2 rounded-lg shadow-md hover:shadow-lg transition-all"
                                 >
                                     <img
-                                        src={product.images}
+                                        src={product.images[0]}
                                         alt={product.title}
                                         className="w-24 h-24 object-contain mb-2"
                                     />
